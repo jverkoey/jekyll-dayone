@@ -127,12 +127,7 @@ module Dayone
         return false
       end
 
-      needles.each do |needle|
-        if haystack.include?(needle)
-          return true
-        end
-      end
-      return false
+      return (haystack & needles).any?
     end
 
     # Returns an enumerator that touches all of the posts
