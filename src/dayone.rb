@@ -30,7 +30,7 @@ module Dayone
     def generate_tag_walk(tags)
       # Note(featherless): Am I missing a cleaner way to
       # bail out for nil args?
-      if tags.nil? or not tags.any?
+      if tags.nil? || tags.empty?
         return nil
       end
 
@@ -197,7 +197,7 @@ module Dayone
       # We have the server config YAML loaded, find the Day One path.
       dayonepath = serverconfig['dayonepath']
       raise "Missing dayonepath key in " + DAYONE_CONFIG_PATH if dayonepath.nil?
-      raise "dayonepath must point to an existing path" if not File.directory?(dayonepath)
+      raise "dayonepath must point to an existing path" unless File.directory?(dayonepath)
 
       print "\n          - Building tag tree... "
 
@@ -205,7 +205,7 @@ module Dayone
       # tags to find which post to attach each to later.
       tag_tree = Hash.new
       site.posts.each do |post|
-        if not post.tags.any?
+        if post.tags.empty?
           next
         end
 
@@ -233,7 +233,7 @@ module Dayone
 
         # Find all of the posts that this Day One's tags match to.
         posts = get_tag_tree_posts(tag_tree, doc['tags'])
-        if posts.nil? or posts.length == 0
+        if posts.nil? || posts.empty?
           next
         end
 
