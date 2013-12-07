@@ -112,7 +112,7 @@ module Dayone
       hash.each do |key,value|
         sanitized_key = key.downcase.tr(" ", "_")
 
-        if value.class == Hash
+        if value.is_a? Hash
           new_hash[sanitized_key] = sanitize_keys(value)
         else
           new_hash[sanitized_key] = value
