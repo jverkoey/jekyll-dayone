@@ -1,5 +1,5 @@
-$LOAD_PATH.unshift File.dirname(__FILE__)
-require File.join(File.dirname(__FILE__), '../..', 'src/dayone.rb')
+# Modify this to get to the path of your dayone.rb file.
+require File.join(File.dirname(__FILE__), '../../src/dayone.rb')
 
 module Dayone
   class Generator < Jekyll::Generator

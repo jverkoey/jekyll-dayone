@@ -10,7 +10,8 @@ a Day One entry for it to be included in the Jekyll post.
 
 For example, a Jekyll post with the tags
 
-    ["Costa Rica", "Monteverde"]
+    - Costa Rica
+    - Monteverde
 
 would include any Day One post that has *at least* "Costa Rica"
 and "Monteverde" in its set of tags.
@@ -38,8 +39,8 @@ and "Monteverde" in its set of tags.
 - Use the following code to create a Dayone Processor and
   process your Day One entries.
 
-    $LOAD_PATH.unshift File.dirname(__FILE__)
-    require File.join(File.dirname(__FILE__), '../..', 'src/dayone.rb')
+    # Modify this to get to the path of your dayone.rb file.
+    require File.join(File.dirname(__FILE__), '../../src/dayone.rb')
 
     module Dayone
       class Generator < Jekyll::Generator

@@ -11,10 +11,10 @@ require 'plist'
 DAYONE_CONFIG_PATH = File.join(File.dirname(__FILE__), 'config.yml')
 TAG_TREE_POST_KEY = '#_post_#'
 
-# The Day One Jekyll module. Being a Generator allows this plugin
-# to inject the Day One entries into Liquid before the pages get
-# rendered. Day One entries will be made accessible via
-# `page.dayones`.
+# The Day One Jekyll module. This module includes a Processor class
+# which may be subclassed in order to provide additional
+# functionality. When the processor is executed on a given Generator
+# page, Day One entries will be made accessible via `page.dayones`.
 module Dayone
   class Processor
 
