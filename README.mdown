@@ -1,0 +1,83 @@
+# Jekyll Day One Plugin
+
+This is a Jekyll plugin for the Day One journaling app. It reads
+Day One entries from a folder and exposes them to the Liquid
+templating system via `page.dayones`.
+
+Day One entries are matched to Jekyll posts using tags from each
+system. A Jekyll post's tags define the minimum tags required by
+a Day One entry for it to be included in the Jekyll post.
+
+For example, a Jekyll post with the tags
+
+    ["Costa Rica", "Monteverde"]
+
+would include any Day One post that has *at least* "Costa Rica"
+and "Monteverde" in its set of tags.
+
+# Installation
+
+- Copy src/dayone.rb into your Jekyll site in a folder named
+  _dayone.
+
+- Create a config.yml file in the same folder as dayone.rb,
+  e.g. _dayone/dayone.rb, _dayone/config.yml
+  Note: this is distinct from the Jekyll config.yml file in
+  the root of your Jekyll site.
+
+- Specify the absolute path to your Journal.dayone folder in
+  _dayone/config.yml.
+   dayonepath: "/path/to/Dropbox/Apps/Day One/Journal.dayone"
+
+- Optional: Add _dayone/config.yml to your .gitignore so that
+  you can have a different path in dev vs production.
+
+- Create a dayone.rb file in your Jekyll site's _plugins
+  folder.
+
+- Use the following code to create a Dayone Processor and
+  process your Day One entries.
+
+    $LOAD_PATH.unshift File.dirname(__FILE__)
+    require File.join(File.dirname(__FILE__), '../..', 'src/dayone.rb')
+
+    module Dayone
+      class Generator < Jekyll::Generator
+        def generate(site)
+          processor = Processor.new
+          processor.attach_dayones_to_site(site)
+        end
+      end
+    end
+
+- You can now access your Day One entries in your Jekyll posts
+  via `page.dayones`.
+
+# Accessing Day One Entries in your Jekyll Posts
+
+Jekyll posts will be provided with a subset of Day One entries
+via `page.dayones`. This subset is determined by the tags
+specified in each Jekyll post. You can specify tags in a Jekyll
+post by including a list of tags in the yml preamble. For
+example:
+
+    title: "Costa Rica: Monteverde"
+    tags:
+    - Costa Rica
+    - Monteverde
+
+Any Day One post that includes *at least* those tags will then
+be provided via `page.dayones`.
+
+# Sample Jekyll Site
+
+Run `jekyll` in the sample/ folder to generate a sample website
+using stock Day One data.
+
+# License
+
+Apache 2.0. Written by Jeff Verkoeyen.
+
+# Live Examples
+
+[Jeff Verkoeyen's Blog](http://blog.jeffverkoeyen.com/)

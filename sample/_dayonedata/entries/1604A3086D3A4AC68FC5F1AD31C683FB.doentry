@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Creation Date</key>
+	<date>2013-12-07T06:55:31Z</date>
+	<key>Creator</key>
+	<dict>
+		<key>Device Agent</key>
+		<string>iPhone/iPhone4,1</string>
+		<key>Generation Date</key>
+		<date>2013-12-07T06:55:31Z</date>
+		<key>Host Name</key>
+		<string>swift</string>
+		<key>OS Agent</key>
+		<string>iOS/7.0.4</string>
+		<key>Software Agent</key>
+		<string>Day One iOS/1.12</string>
+	</dict>
+	<key>Entry Text</key>
+	<string>This is a Sample Post
+
+### It has headers
+
+And [links](http://jeffverkoeyen.com).
+
+And *markdown* **formatting**.</string>
+	<key>Location</key>
+	<dict>
+		<key>Administrative Area</key>
+		<string>Puntarenas</string>
+		<key>Country</key>
+		<string>Costa Rica</string>
+		<key>Latitude</key>
+		<real>10.316376392739189</real>
+		<key>Longitude</key>
+		<real>-84.825470047150574</real>
+		<key>Place Name</key>
+		<string>Highway 145</string>
+	</dict>
+	<key>Starred</key>
+	<false/>
+	<key>Tags</key>
+	<array>
+		<string>Documentation</string>
+	</array>
+	<key>Time Zone</key>
+	<string>America/Costa_Rica</string>
+	<key>UUID</key>
+	<string>1604A3086D3A4AC68FC5F1AD31C683FB</string>
+	<key>Weather</key>
+	<dict>
+		<key>Celsius</key>
+		<string>24</string>
+		<key>Description</key>
+		<string>Mostly Clear</string>
+		<key>Fahrenheit</key>
+		<string>75</string>
+		<key>IconName</key>
+		<string>cloudyn.png</string>
+		<key>Pressure MB</key>
+		<integer>1012</integer>
+		<key>Relative Humidity</key>
+		<integer>89</integer>
+		<key>Service</key>
+		<string>HAMweather</string>
+		<key>Sunrise Date</key>
+		<date>2013-12-07T11:53:33Z</date>
+		<key>Sunset Date</key>
+		<date>2013-12-07T23:19:42Z</date>
+		<key>Wind Bearing</key>
+		<integer>0</integer>
+		<key>Wind Chill Celsius</key>
+		<integer>24</integer>
+		<key>Wind Speed KPH</key>
+		<integer>0</integer>
+	</dict>
+</dict>
+</plist>

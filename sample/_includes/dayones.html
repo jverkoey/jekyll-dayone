@@ -1,0 +1,7 @@
+{% for dayone in page.dayones %}
+<h1>{{ dayone.title_text }}</h1>
+<h2>{{ dayone.creation_date | date_to_long_string }}</h2>
+<div>
+  {{ dayone.entry_text | markdownify }}
+</div>
+{% endfor %}
