@@ -34,9 +34,7 @@ and "Monteverde" in its set of tags.
   you can have a different path in dev vs production.
 
 - Create a `dayone.rb` file in your Jekyll site's _plugins
-  folder.
-
-- Use the following code to create a Dayone Processor and
+  folder. Use the following code to create a Dayone Processor and
   process your Day One entries.
 
 ```
@@ -71,6 +69,19 @@ example:
 
 Any Day One post that includes *at least* those tags will then
 be provided via `page.dayones`.
+
+A simple Liquid implementation that lists all Day One entries
+for a post follows:
+
+```
+{% for dayone in page.dayones %}
+<h1>{{ dayone.title_text }}</h1>
+<h2>{{ dayone.creation_date | date_to_long_string }}</h2>
+<div>
+  {{ dayone.entry_text | markdownify }}
+</div>
+{% endfor %}
+```
 
 # Sample Jekyll Site
 
