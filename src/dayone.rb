@@ -50,9 +50,7 @@ module Dayone
 
       node = tag_tree
       tag_walk.each do |tag|
-        if not node.has_key?(tag)
-          node[tag] = Hash.new
-        end
+        node[tag] ||= Hash.new
         node = node[tag]
       end
 
@@ -241,9 +239,7 @@ module Dayone
           data = post.data
 
           # Attach this Day One entry to the post.
-          if not data.has_key?('dayones')
-            data['dayones'] = Array.new
-          end
+          data['dayones'] ||= Array.new
           data['dayones'].concat([doc])
         end
       end
