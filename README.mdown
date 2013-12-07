@@ -85,7 +85,7 @@ for a post follows:
 
 # Sample Jekyll Site
 
-Run `jekyll` in the sample/ folder to generate a sample website
+Run `jekyll` in the `sample/` folder to generate a sample website
 using stock Day One data.
 
 # License
