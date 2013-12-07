@@ -18,38 +18,40 @@ and "Monteverde" in its set of tags.
 
 # Installation
 
-- Copy src/dayone.rb into your Jekyll site in a folder named
+- Copy `src/dayone.rb` into your Jekyll site in a folder named
   _dayone.
 
-- Create a config.yml file in the same folder as dayone.rb,
-  e.g. _dayone/dayone.rb, _dayone/config.yml
-  Note: this is distinct from the Jekyll config.yml file in
+- Create a config.yml file in the same folder as `dayone.rb`,
+  e.g. `_dayone/dayone.rb`, `_dayone/config.yml`
+  Note: this is distinct from the Jekyll `config.yml` file in
   the root of your Jekyll site.
 
-- Specify the absolute path to your Journal.dayone folder in
-  _dayone/config.yml.
+- Specify the absolute path to your `Journal.dayone` folder in
+  `_dayone/config.yml`.
    dayonepath: "/path/to/Dropbox/Apps/Day One/Journal.dayone"
 
-- Optional: Add _dayone/config.yml to your .gitignore so that
+- Optional: Add `_dayone/config.yml` to your `.gitignore` so that
   you can have a different path in dev vs production.
 
-- Create a dayone.rb file in your Jekyll site's _plugins
+- Create a `dayone.rb` file in your Jekyll site's _plugins
   folder.
 
 - Use the following code to create a Dayone Processor and
   process your Day One entries.
 
-    # Modify this to get to the path of your dayone.rb file.
-    require File.join(File.dirname(__FILE__), '../../src/dayone.rb')
+```
+# Modify this to get to the path of your dayone.rb file.
+require File.join(File.dirname(__FILE__), '../../src/dayone.rb')
 
-    module Dayone
-      class Generator < Jekyll::Generator
-        def generate(site)
-          processor = Processor.new
-          processor.attach_dayones_to_site(site)
-        end
-      end
+module Dayone
+  class Generator < Jekyll::Generator
+    def generate(site)
+      processor = Processor.new
+      processor.attach_dayones_to_site(site)
     end
+  end
+end
+```
 
 - You can now access your Day One entries in your Jekyll posts
   via `page.dayones`.
