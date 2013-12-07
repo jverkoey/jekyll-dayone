@@ -249,7 +249,7 @@ module Dayone
       # sort them.
       post_enumerator_from_tag_tree(tag_tree).each do |post|
         if post.data.has_key?('dayones')
-          post.data['dayones'].sort! { |a,b| a['creation_date'] <=> b['creation_date'] }
+          post.data['dayones'].sort_by! { |a| a['creation_date'] }
         end
 
         process_post(post)
