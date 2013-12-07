@@ -30,7 +30,7 @@ module Dayone
     def generate_tag_walk(tags)
       # Note(featherless): Am I missing a cleaner way to
       # bail out for nil args?
-      if tags.nil? or not tags.any? then
+      if tags.nil? or not tags.any?
         return nil
       end
 
@@ -44,13 +44,13 @@ module Dayone
     # Builds a tag tree from an array of tag strings.
     def build_tag_tree(tag_tree, tags)
       tag_walk = generate_tag_walk(tags)
-      if tag_walk.nil? then
+      if tag_walk.nil?
         return nil
       end
 
       node = tag_tree
       tag_walk.each do |tag|
-        if not node.has_key?(tag) then
+        if not node.has_key?(tag)
           node[tag] = Hash.new
         end
         node = node[tag]
@@ -64,7 +64,7 @@ module Dayone
     # to any touched nodes.
     def get_tag_tree_posts(tag_tree, tags)
       tag_walk = generate_tag_walk(tags)
-      if tag_walk.nil? then
+      if tag_walk.nil?
         return nil
       end
 
@@ -82,21 +82,21 @@ module Dayone
 
         # We return every touched node's post, if
         # it has one.
-        if node.has_key?(TAG_TREE_POST_KEY) then
+        if node.has_key?(TAG_TREE_POST_KEY)
           posts.push(node[TAG_TREE_POST_KEY])
         end
 
         tag_walk.each do |tag|
-          if node.has_key?(tag) then
+          if node.has_key?(tag)
             queue.push(node[tag])
           end
         end
 
       end
-      
+
       return posts
     end
-    
+
     # Recursively walks a hash tree and sanitizes each key
     # so that they can be used in Liquid templates. Spaces
     # will be replaced with "_" characters and all
@@ -114,7 +114,7 @@ module Dayone
       hash.each do |key,value|
         sanitized_key = key.downcase.tr(" ", "_")
 
-        if value.class == Hash then
+        if value.class == Hash
           new_hash[sanitized_key] = sanitize_keys(value)
         else
           new_hash[sanitized_key] = value
@@ -122,10 +122,10 @@ module Dayone
       end
       return new_hash
     end
-    
+
     # Tests if haystack includes any of the needles.
     def orinclude?(haystack, needles)
-      if haystack.nil? or needles.nil? then
+      if haystack.nil? or needles.nil?
         return false
       end
 
@@ -153,7 +153,7 @@ module Dayone
         end
       end
     end
-    
+
     # Extracts the title from a given Day One entry.
     #
     # The title is the first sentence of a Day One entry unless
@@ -165,23 +165,23 @@ module Dayone
       # Get the title.
       loc_firstperiod = entry_text.index(".")
       loc_firstnewline = entry_text.index("\n")
-      if not loc_firstnewline.nil? and not loc_firstperiod.nil? then
+      if not loc_firstnewline.nil? and not loc_firstperiod.nil?
         # Newline before the first period or directly after it.
-        if loc_firstnewline < loc_firstperiod then
+        if loc_firstnewline < loc_firstperiod
           title_text = entry_text[0, loc_firstnewline]
           entry_text = entry_text[loc_firstnewline + 1..entry_text.length]
-        elsif loc_firstperiod == loc_firstnewline - 1 then
+        elsif loc_firstperiod == loc_firstnewline - 1
           title_text = entry_text[0, loc_firstperiod]
           entry_text = entry_text[loc_firstperiod + 1..entry_text.length]
         end
-      elsif not loc_firstnewline.nil? and loc_firstperiod.nil? then  
+      elsif not loc_firstnewline.nil? and loc_firstperiod.nil?
         title_text = entry_text[0, loc_firstnewline]
         entry_text = entry_text[loc_firstnewline+1..entry_text.length]
       end
       doc['entry_text'] = entry_text
       doc['title_text'] = title_text
     end
-    
+
     # Returns a Boolean indicating whether or not the title should
     # be extracted from the first line of the given Day One entry.
     def should_extract_title(doc)
@@ -198,14 +198,14 @@ module Dayone
       dayonepath = serverconfig['dayonepath']
       raise "Missing dayonepath key in " + DAYONE_CONFIG_PATH if dayonepath.nil?
       raise "dayonepath must point to an existing path" if not File.directory?(dayonepath)
-      
+
       print "\n          - Building tag tree... "
 
       # Build the tag tree from Jekyll's posts. We'll use the Day One entry
       # tags to find which post to attach each to later.
       tag_tree = Hash.new
       site.posts.each do |post|
-        if not post.tags.any? then
+        if not post.tags.any?
           next
         end
 
@@ -225,7 +225,7 @@ module Dayone
         # In order to parse the data in Liquid we have to convert the DateTime object to a string.
         doc['creation_date'] = doc['creation_date'].to_s
 
-        if should_extract_title(doc) then
+        if should_extract_title(doc)
           extract_title(doc)
         end
 
@@ -233,15 +233,15 @@ module Dayone
 
         # Find all of the posts that this Day One's tags match to.
         posts = get_tag_tree_posts(tag_tree, doc['tags'])
-        if posts.nil? or posts.length == 0 then
+        if posts.nil? or posts.length == 0
           next
         end
-        
+
         posts.each do |post|
           data = post.data
 
           # Attach this Day One entry to the post.
-          if not data.has_key?('dayones') then
+          if not data.has_key?('dayones')
             data['dayones'] = Array.new
           end
           data['dayones'].concat([doc])
@@ -252,13 +252,13 @@ module Dayone
       # Once we've added all Day One entries, we run a final pass to
       # sort them.
       post_enumerator_from_tag_tree(tag_tree).each do |post|
-        if post.data.has_key?('dayones') then
+        if post.data.has_key?('dayones')
           post.data['dayones'].sort! { |a,b| a['creation_date'] <=> b['creation_date'] }
         end
 
         process_post(post)
       end
-      
+
       print "\n          - Done\n                    "
     end
 
@@ -278,7 +278,7 @@ module Dayone
 end
 
 # Sample Day One entry
-# location: 
+# location:
 #   place_name: Bahia Del Sol Hotel
 #   locality: Bocas del Toro
 #   administrative_area: Panama
@@ -289,9 +289,9 @@ end
 # starred: false
 # entry_text: |-
 #   Bahia del Sol
-#   
+#
 #   $130
-# weather: 
+# weather:
 #   pressure_mb: 1007.46
 #   description: Partly Cloudy
 #   fahrenheit: "80"
@@ -306,12 +306,12 @@ end
 # activity: Stationary
 # uuid: F094F6DF8F314A99B613C0D552076496
 # time_zone: America/Costa_Rica
-# tags: 
+# tags:
 # - Panama
 # - Bocas del Toro
 # - Bed and Breakfast
 # has_pic: false
-# creator: 
+# creator:
 #   generation_date: 2013-11-26T17:00:13+00:00
 #   host_name: swift
 #   software_agent: Day One iOS/1.12
